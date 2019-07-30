@@ -1,12 +1,9 @@
-import Link from 'next/link';
+import Pictures from '../components/Pictures';
 
 
 const Home = props => (
   <div>
-    HOME!
-    <Link href="/list">
-      <a>Go to list</a>
-    </Link>
+    <Pictures />
   </div>
 )
 
