@@ -6,11 +6,11 @@ const Nav = () => (
     <Link href="/">
       <a>Home</a>
     </Link>
+    <Link href="/add-photo">
+      <a>Add Photos</a>
+    </Link>
     <Link href="/albums">
       <a>Albums</a>
-    </Link>
-    <Link href="/add">
-      <a>Add</a>
     </Link>
     <Link href="/signup">
       <a>Signup</a>

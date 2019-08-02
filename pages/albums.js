@@ -1,12 +1,13 @@
 import Link from 'next/link';
-
+import Albums from '../components/Albums';
 
 const Album = props => (
   <div>
-    Album!
-    <Link href="/">
-      <a>Go to home</a>
+    <Link href="/create-album">
+      <a>Create new album</a>
     </Link>
+    <br />
+    <Albums />
   </div>
 )
 
