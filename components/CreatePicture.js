@@ -35,6 +35,24 @@ class CreatePicture extends Component {
     const { name, value } = e.target;
     this.setState({ [name]: value })
   }
+  uploadFile = async e => {
+    console.log('uploading file...');
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'albumpage');
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/marc89/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+    const file = await res.json();
+    console.log(file);
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    });
+  };
 
   render() {
     return (
@@ -80,15 +98,15 @@ class CreatePicture extends Component {
                   onChange={this.handleChange}
                 />
               </label>
-              <label htmlFor="image">
+              <label htmlFor="file">
                 Image
               <input
-                  type="text"
-                  id="image"
-                  name="image"
-                  placeholder="image"
-                  value={this.state.image}
-                  onChange={this.handleChange}
+                  type="file"
+                  id="file"
+                  name="file"
+                  placeholder="Upload an image"
+                  required
+                  onChange={this.uploadFile}
                 />
               </label>
               <button type="submit">{!this.state.addMore ? 'Add image' : 'Add another image'}</button>

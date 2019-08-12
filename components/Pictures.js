@@ -30,18 +30,36 @@ const PicturesList = styled.div`
   margin: 0 auto;
 `;
 
+const ChoosePicturesList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  max-width: ${props => props.theme.maxWidth};
+  margin: 0 auto;
+  :hover{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+`;
+
 class Pictures extends Component {
+
   render() {
     return (
       <Center>
-        <p>Pictures</p>
         <Query query={ALL_PICTURES_QUERY}>
           {
             ({ data, error, loading }) => {
               if (loading) return <p>Loading...</p>
               if (error) return <p>Error: {error.message}</p>
               return (
-                <PicturesList>{data.pictures.map(picture => <Picture picture={picture} key={picture.id} />)}</PicturesList>
+                this.props.mainHome ?
+                  <PicturesList>{data.pictures.map(picture =>
+                    <Picture homeDisplay picture={picture} key={picture.id} />)}
+                  </PicturesList>
+                  :
+                  <ChoosePicturesList>{data.pictures.map(picture =>
+                    <Picture selectPicture={this.props.selectPicture} picture={picture} key={picture.id} />)}
+                  </ChoosePicturesList>
               )
             }
           }

@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import ErrorMessage from '../components/ErrorMessage';
 import { RandomFallbackCoverImageAlbum } from '../utils/constants';
+import Pictures from './Pictures';
 
 
 const CREATE_ALBUM_MUTATION = gql`
@@ -12,12 +13,14 @@ const CREATE_ALBUM_MUTATION = gql`
     $description: String
     $coverImage: String
     $largeCoverImage: String
+    $pictures: [String]
   ) {
     createAlbum(
       title: $title
       description: $description
       coverImage: $coverImage
       largeCoverImage: $largeCoverImage
+      pictures: $pictures
     ) {
       id
     }
@@ -30,10 +33,14 @@ class CreateAlbum extends Component {
     description: '',
     coverImage: '',
     largeCoverImage: '',
+    pictures: [],
   }
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value })
+  }
+  selectPicture = (imageId) => {
+    this.state.pictures.push(imageId)
   }
 
   render() {
@@ -85,6 +92,7 @@ class CreateAlbum extends Component {
                   onChange={this.handleChange}
                 />
               </label>
+              <Pictures selectPicture={this.selectPicture} />
               <button type="submit">Submit</button>
             </fieldset>
           </Form>

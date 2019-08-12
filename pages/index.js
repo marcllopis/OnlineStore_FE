@@ -3,7 +3,7 @@ import Pictures from '../components/Pictures';
 
 const Home = props => (
   <div>
-    <Pictures />
+    <Pictures mainHome />
   </div>
 )
 

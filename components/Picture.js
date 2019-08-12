@@ -8,23 +8,26 @@ import PictureStyles from './styles/PictureStyles';
 class Picture extends Component {
 
   render() {
-    const { picture } = this.props;
+    const { picture, homeDisplay } = this.props;
+
     return (
       <PictureStyles>
-        {picture.image && <img src={picture.image} alt={picture.title} />}
-
-        <Title>
-          <Link
-            href={{
-              pathname: '/picture',
-              query: { id: picture.id },
-            }}
-          >
-            <a>{picture.title}</a>
-          </Link>
-        </Title>
-        <p>{picture.description}</p>
-
+        {picture.image && <img onClick={() => this.props.selectPicture(picture.id)} src={picture.image} alt={picture.title} />}
+        {homeDisplay &&
+          <div>
+            <Title>
+              <Link
+                href={{
+                  pathname: '/picture',
+                  query: { id: picture.id },
+                }}
+              >
+                <a>{picture.title}</a>
+              </Link>
+            </Title>
+            <p>{picture.description}</p>
+          </div>
+        }
         {/* <div className="buttonList">
           <Link
             href={{
