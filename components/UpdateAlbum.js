@@ -61,6 +61,8 @@ class UpdateAlbum extends Component {
   }
 
   render() {
+    console.log('props', this.props);
+
     return (
       <Query query={SINGLE_ALBUM_QUERY} variables={{ id: this.props.id }}>
         {({ data, loading }) => {
